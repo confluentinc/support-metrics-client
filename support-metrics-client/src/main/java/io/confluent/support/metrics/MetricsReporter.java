@@ -130,9 +130,14 @@ public class MetricsReporter implements Runnable {
   }
 
   private String getCustomerId(Properties serverConfiguration) {
+    String fallbackId = SupportConfig.CONFLUENT_SUPPORT_CUSTOMER_ID_DEFAULT;
     String id = serverConfiguration.getProperty(SupportConfig.CONFLUENT_SUPPORT_CUSTOMER_ID_CONFIG);
     if (id == null || id.isEmpty()) {
-      id = SupportConfig.CONFLUENT_SUPPORT_CUSTOMER_ID_DEFAULT;
+      id = fallbackId;
+    }
+    if (!SupportConfig.isWellFormedCustomerId(id)) {
+      log.error("'{}' is not a valid Confluent customer ID -- falling back to id '{}'", id, fallbackId);
+      id = fallbackId;
     }
     return id;
   }
