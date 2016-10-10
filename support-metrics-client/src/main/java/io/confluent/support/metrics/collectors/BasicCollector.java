@@ -30,25 +30,17 @@ public class BasicCollector extends Collector {
     private final TimeUtils time;
     private final Uuid uuid;
     private final KafkaServer server;
-    private final Runtime serverRuntime;
-    private final Properties serverConfiguration;
 
     public BasicCollector(KafkaServer server,
-                          Properties serverConfiguration,
-                          Runtime serverRuntime,
                           TimeUtils time) {
-        this(server, serverConfiguration, serverRuntime, time, new Uuid());
+        this(server, time, new Uuid());
     }
 
     public BasicCollector(KafkaServer server,
-                          Properties serverConfiguration,
-                          Runtime serverRuntime,
                           TimeUtils time,
                           Uuid uuid) {
         super();
         this.server = server;
-        this.serverConfiguration = serverConfiguration;
-        this.serverRuntime = serverRuntime;
         this.time = time;
         this.uuid = uuid;
     }

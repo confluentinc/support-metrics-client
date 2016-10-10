@@ -35,7 +35,8 @@
     {
       "name": "clusterId",
       "type": "string",
-      "doc": "A unique identifier for the Kafka cluster."
+      "doc": "A unique identifier for the Kafka cluster.",
+      "default": "NA"
     }
   ]
 }

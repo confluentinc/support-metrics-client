@@ -48,7 +48,7 @@ public class BasicCollectorTest {
     TimeUtils time = new TimeUtils();
     Uuid uuid = new Uuid();
     long unixTimeAtTestStart = time.nowInUnixTime();
-    Collector metricsCollector = new BasicCollector(mockServer, null, null, time, uuid);
+    Collector metricsCollector = new BasicCollector(mockServer, time, uuid);
 
     // When
     GenericContainer metricsRecord = metricsCollector.collectMetrics();
