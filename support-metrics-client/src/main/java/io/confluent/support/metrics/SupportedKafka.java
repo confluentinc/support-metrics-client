@@ -37,7 +37,6 @@ import kafka.Kafka;
 public class SupportedKafka {
 
   private static final Logger log = LoggerFactory.getLogger(SupportedKafka.class);
-  private static Map<String, SignalHandler> jvmSignalHandlers = new HashMap<>();
 
   public static void main(String[] args) throws Exception {
     try {
@@ -64,8 +63,7 @@ public class SupportedKafka {
     System.exit(ExitCodes.SUCCESS);
   }
 
-
-  private static void registerSignalHandler(String signalName) {
+  private static void registerSignalHandler(String signalName, final Map<String, SignalHandler> jvmSignalHandlers) {
     SignalHandler oldHandler = Signal.handle(new Signal(signalName), new SignalHandler() {
       @Override
       public void handle(Signal signal) {
@@ -79,8 +77,9 @@ public class SupportedKafka {
   }
 
   private static void registerLoggingSignalHandler(){
-    registerSignalHandler("TERM");
-    registerSignalHandler("INT");
-    registerSignalHandler("HUP");
+    final Map<String, SignalHandler> jvmSignalHandlers = new HashMap<>();
+    registerSignalHandler("TERM", jvmSignalHandlers);
+    registerSignalHandler("INT", jvmSignalHandlers);
+    registerSignalHandler("HUP", jvmSignalHandlers);
   }
 }
