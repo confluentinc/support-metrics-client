@@ -17,11 +17,7 @@ import org.apache.kafka.common.utils.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
-import sun.misc.Signal;
-import sun.misc.SignalHandler;
 
 import kafka.metrics.KafkaMetricsReporter;
 import kafka.metrics.KafkaMetricsReporter$;
@@ -46,10 +42,8 @@ public class SupportedServerStartable {
   private final KafkaServer server;
   private MetricsReporter metricsReporter = null;
   private Thread metricsThread = null;
-  private Map<String, SignalHandler> jvmSignalHandlers = new HashMap<>();
 
   public SupportedServerStartable(Properties brokerConfiguration) {
-    registerLoggingSignalHandler();
     Seq<KafkaMetricsReporter> reporters = KafkaMetricsReporter$.MODULE$.startReporters(new VerifiableProperties(brokerConfiguration));
     KafkaConfig serverConfig = KafkaConfig.fromProps(brokerConfiguration);
     Option<String> noThreadNamePrefix = Option.empty();
@@ -177,22 +171,4 @@ public class SupportedServerStartable {
     return getMetricsReporter() != null;
   }
 
-  private void registerSignalHandler(String signalName) {
-    SignalHandler oldHandler = Signal.handle(new Signal(signalName), new SignalHandler() {
-      @Override
-      public void handle(Signal signal) {
-        log.info("Terminating process due to signal {}", signal);
-        SignalHandler oldHandler = jvmSignalHandlers.get(signal.getName());
-        if (oldHandler != null)
-          oldHandler.handle(signal);
-      }
-    });
-    jvmSignalHandlers.put(signalName, oldHandler);
-  }
-
-  private void registerLoggingSignalHandler(){
-    registerSignalHandler("TERM");
-    registerSignalHandler("INT");
-    registerSignalHandler("HUP");
-  }
 }
