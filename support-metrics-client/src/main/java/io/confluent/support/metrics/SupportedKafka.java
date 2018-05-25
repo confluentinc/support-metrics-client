@@ -45,13 +45,15 @@ public class SupportedKafka {
       final SupportedServerStartable supportedServerStartable =
           new SupportedServerStartable(serverProps);
 
-      if (!isWindows() && !isIbmJdk())
+      if (!isWindows() && !isIbmJdk()) {
         try {
           new LoggingSignalHandler().register();
         } catch (ReflectiveOperationException e) {
-          log.warn("Failed to register optional signal handler that logs a message when the process is " +
-                  "terminated via a signal. Reason for registration failure is: " + e);
+          log.warn("Failed to register optional signal handler that logs a message when "
+                  + "the process is terminated via a signal. Reason for registration "
+                  + "failure is: " + e);
         }
+      }
 
       // attach shutdown handler to catch terminating signals as well as normal termination
       Runtime.getRuntime().addShutdownHook(new Thread() {
