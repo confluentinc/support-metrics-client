@@ -1,4 +1,6 @@
 # Confluent Proactive Support: Client
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fconfluentinc%2Fsupport-metrics-client.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fconfluentinc%2Fsupport-metrics-client?ref=badge_shield)
+
 
 # Overview
 
@@ -58,3 +60,6 @@ Branch `0.9.0.0` => code to integrate with Apache Kafka version 0.9.0.0 release
                   ...
                 </project>
 ```
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fconfluentinc%2Fsupport-metrics-client.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fconfluentinc%2Fsupport-metrics-client?ref=badge_large)
