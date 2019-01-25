@@ -30,7 +30,7 @@ RUNTIME_SEC=10
 
 print_help() {
   local script_name="$1"
-  echo "Usage: $script_name --zookeeper <server:port> [--topic <Kafka support topic>] [--file <bundle output file>] [--runtime <time in seconds>]"
+  echo "Usage: $script_name --bootstrap-server <server:port> [--topic <Kafka support topic>] [--file <bundle output file>] [--runtime <time in seconds>]"
   echo
   echo "Creates a so-called 'support metrics bundle' file in the current directory."
   echo "This support metrics bundle contains metrics retrieved from the target Kafka cluster."
