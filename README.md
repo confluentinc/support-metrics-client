@@ -4,7 +4,6 @@
 
 This repository contains the client application for metrics collection of proactive support.
 
-
 # Development
 
 ## Requirements
