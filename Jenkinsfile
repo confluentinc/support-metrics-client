@@ -2,4 +2,5 @@
 common {
   slackChannel = '#proactive-support'
   upstreamProjects = 'confluentinc/support-metrics-common'
+  disableConcurrentBuilds = true
 }
